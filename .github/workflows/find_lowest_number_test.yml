@@ -1,0 +1,33 @@
+name: test find_lowest_number
+on: [push]
+jobs:
+  Run_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # install the python version needed
+
+      - name: test 1 - 10 different numbers
+        run: python find_lowest_number.py test_data/test1_input.txt test_data/test1_output.txt
+
+      - name: check test 1 output
+        run: diff test_data/test1_output.txt test_data/test1_expected.txt
+
+      - name: test 2 - 1 number
+        run: python find_lowest_number.py test_data/test2_input.txt test_data/test2_output.txt
+
+      - name: check test 2 output
+        run: diff test_data/test2_output.txt test_data/test2_expected.txt
+
+      - name: test 3 - no numbers
+        run: python find_lowest_number.py test_data/test3_input.txt test_data/test3_output.txt
+
+      - name: check test 3 output
+        run: diff test_data/test3_output.txt test_data/test3_expected.txt
+    
+  
